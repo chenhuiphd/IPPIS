@@ -1,4 +1,4 @@
-# Incorporating-Polarization-aware-Physical-Inference-and-SAM-for-Image-Dehazing
+# IPPIS
 ## Inference
 
 ```
