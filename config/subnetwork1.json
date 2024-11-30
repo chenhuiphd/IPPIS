@@ -1,0 +1,64 @@
+{
+    "name": "default",
+    "n_gpu": 2,
+    "module": "C2PNet",
+    "data_loader": {
+        "type": "TrainDataLoader",
+        "args": {
+            "data_dir": "data/train",
+            "extra_dir": "",
+            "batch_size": 2,
+            "shuffle": true,
+            "validation_split": 0.0,
+            "num_workers": 4
+        }
+    },
+    "model": {
+        "type": "C2PNet",
+        "args": {
+
+            "gps": 3,
+            "blocks":19
+        }
+    },
+    "loss": {
+        "type": "l1_and_l2",
+        "args": {
+            "R_l2_loss_lambda": 1
+        }
+    },
+    "metrics": [
+        "psnr",
+        "ssim"
+    ],
+    "optimizer": {
+        "type": "Adam",
+        "args": {
+            "lr": 0.0001,
+            "betas": [
+                0.5,
+                0.999
+            ],
+            "weight_decay": 0,
+            "amsgrad": true
+        }
+    },
+    "lr_scheduler": {
+        "type": "StepLR",
+        "args": {
+            "lr_lambda_tag": "subnetwork1"
+        }
+    },
+    "trainer": {
+        "type": "DefaultTrainer",
+        "args": {
+            "epochs": 120,
+            "save_dir": "saved_subnetwork1",
+            "save_period": 10,
+            "verbosity": 2,
+            "monitor": "off",
+            "tensorboardX": true,
+            "log_dir": "saved_subnetwork1/runs"
+        }
+    }
+}
